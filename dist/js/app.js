@@ -6,8 +6,4 @@ const negociacao = new Negociacao(
     100
 );
 
-console.log(negociacao);
-
-negociacao.quantidade = 1000;
-
-console.log(negociacao);
+console.log(negociacao.volume);
