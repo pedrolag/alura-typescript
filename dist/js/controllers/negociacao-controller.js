@@ -17,12 +17,19 @@ export class NegociacaoController {
     adiciona() {
         // Criar um novo objeto negociacao
         const negociacao = this.criaNegociacao();
-        // Adicionar a negociacao na lista de negociacoes
-        this.negociacoes.adiciona(negociacao);
-        // Limpar o formulario
-        this.limparFormulario();
-        // Atualizar toda a view
-        this.atualizaView();
+        // Regra: Negociações podem ser feitas apenas em dias úteis
+        if (negociacao.data.getDay() > 0 && negociacao.data.getDay() < 6) {
+            // Adicionar a negociacao na lista de negociacoes
+            this.negociacoes.adiciona(negociacao);
+            // Limpar o formulario
+            this.limparFormulario();
+            // Atualizar toda a view
+            this.atualizaView();
+        }
+        else {
+            // Notifica o usuário
+            this.mensagemView.update("As negociações podem ser feitas apenas em dias úteis.");
+        }
     }
     criaNegociacao() {
         // Tratar o campo "data": string -> date
