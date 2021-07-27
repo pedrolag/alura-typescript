@@ -11,7 +11,7 @@ export abstract class View<T> {
     // Retorna o HTML da view
     // "abstract" -> Força o programador a implementar um método "template"
     //               quando a classe for extendida.
-    abstract template(model: T): string;
+    protected abstract template(model: T): string;
 
     // Renderiza o HTML da view
     update(model: T): void {
