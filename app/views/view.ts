@@ -4,8 +4,15 @@ export abstract class View<T> {
     //                acessarem esta propriedade.
     protected elemento: HTMLElement;
 
-    constructor(seletor: string) {
+    // Determina se é para remover qualquer tag <script> maliciosa de dentro do template
+    protected escapar = false;
+
+    constructor(seletor: string, escapar?: boolean) {
         this.elemento = document.querySelector(seletor);
+        // this.escapar = escapar ? escapar : false;
+        if (escapar) {
+            this.escapar = escapar;
+        }
     }
 
     // Retorna o HTML da view
@@ -15,7 +22,10 @@ export abstract class View<T> {
 
     // Renderiza o HTML da view
     public update(model: T): void {
-        const template = this.template(model);
+        let template = this.template(model);
+        if (this.escapar) {
+            template = template.replace(/<script>[\s\S]*?<\/script>/, '');
+        }
         this.elemento.innerHTML = template;
     }
 }
