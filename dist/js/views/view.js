@@ -1,14 +1,17 @@
 export class View {
     constructor(seletor, escapar) {
-        // Determina se é para remover qualquer tag <script> maliciosa de dentro do template
         this.escapar = false;
-        this.elemento = document.querySelector(seletor);
-        // this.escapar = escapar ? escapar : false;
+        const elemento = document.querySelector(seletor);
+        if (elemento) {
+            this.elemento = elemento;
+        }
+        else {
+            throw Error(`Elemento "${seletor}" não encontrado.`);
+        }
         if (escapar) {
             this.escapar = escapar;
         }
     }
-    // Renderiza o HTML da view
     update(model) {
         let template = this.template(model);
         if (this.escapar) {
