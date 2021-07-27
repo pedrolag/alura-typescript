@@ -7,6 +7,8 @@ export class NegociacaoController {
         this.negociacoes = new Negociacoes();
         this.negociacoesView = new NegociacoesView('#negociacoesView');
         this.mensagemView = new MensagemView('#mensagemView');
+        this.DOMINGO = 0;
+        this.SABADO = 6;
         // Buscar os valores inseridos pelo usuario
         this.inputData = document.querySelector('#data');
         this.inputQuantidade = document.querySelector('#quantidade');
@@ -18,18 +20,20 @@ export class NegociacaoController {
         // Criar um novo objeto negociacao
         const negociacao = this.criaNegociacao();
         // Regra: Negociações podem ser feitas apenas em dias úteis
-        if (negociacao.data.getDay() > 0 && negociacao.data.getDay() < 6) {
-            // Adicionar a negociacao na lista de negociacoes
-            this.negociacoes.adiciona(negociacao);
-            // Limpar o formulario
-            this.limparFormulario();
-            // Atualizar toda a view
-            this.atualizaView();
-        }
-        else {
+        if (!this.ehDiaUtil(negociacao.data)) {
             // Notifica o usuário
             this.mensagemView.update("As negociações podem ser feitas apenas em dias úteis.");
+            return;
         }
+        // Adicionar a negociacao na lista de negociacoes
+        this.negociacoes.adiciona(negociacao);
+        // Limpar o formulario
+        this.limparFormulario();
+        // Atualizar toda a view
+        this.atualizaView();
+    }
+    ehDiaUtil(data) {
+        return data.getDay() > this.DOMINGO && data.getDay() < this.SABADO;
     }
     criaNegociacao() {
         // Tratar o campo "data": string -> date

@@ -10,6 +10,8 @@ export class NegociacaoController {
     private negociacoes = new Negociacoes();
     private negociacoesView = new NegociacoesView('#negociacoesView');
     private mensagemView = new MensagemView('#mensagemView');
+    private readonly DOMINGO = 0;
+    private readonly SABADO = 6;
 
     constructor() {
         // Buscar os valores inseridos pelo usuario
@@ -26,20 +28,26 @@ export class NegociacaoController {
         const negociacao = this.criaNegociacao();
 
         // Regra: Negociações podem ser feitas apenas em dias úteis
-        if (negociacao.data.getDay() > 0 && negociacao.data.getDay() < 6) {
-            // Adicionar a negociacao na lista de negociacoes
-            this.negociacoes.adiciona(negociacao);
-            
-            // Limpar o formulario
-            this.limparFormulario();
-            
-            // Atualizar toda a view
-            this.atualizaView();
-        } else {
+        if (!this.ehDiaUtil(negociacao.data)) {
             // Notifica o usuário
-            this.mensagemView.update("As negociações podem ser feitas apenas em dias úteis.")
+            this.mensagemView.update("As negociações podem ser feitas apenas em dias úteis.");
+            
+            return ;
         }
+
+        // Adicionar a negociacao na lista de negociacoes
+        this.negociacoes.adiciona(negociacao);
+        
+        // Limpar o formulario
+        this.limparFormulario();
+        
+        // Atualizar toda a view
+        this.atualizaView();
     
+    }
+
+    private ehDiaUtil(data: Date): boolean {
+        return data.getDay() > this.DOMINGO && data.getDay() < this.SABADO;
     }
         
     private criaNegociacao(): Negociacao {
