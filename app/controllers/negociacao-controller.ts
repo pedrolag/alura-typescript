@@ -10,19 +10,26 @@ export class NegociacaoController {
     private negociacoesView = new NegociacoesView('#negociacoesView');
 
     constructor() {
+        // Buscar os valores inseridos pelo usuario
         this.inputData = document.querySelector('#data');
         this.inputQuantidade = document.querySelector('#quantidade');
         this.inputValor = document.querySelector('#valor');
-        this.negociacoesView.update();
+
+        // Atualizar a view
+        this.negociacoesView.update(this.negociacoes);
     }
 
     adiciona(): void {
+        // Criar um novo objeto negociacao
         const negociacao = this.criaNegociacao();
-
+        
+        // Adicionar a negociacao na lista de negociacoes
         this.negociacoes.adiciona(negociacao);
 
-        console.log(this.negociacoes.lista());
+        // Atualizar a view com a lista de negociacoes atualizada
+        this.negociacoesView.update(this.negociacoes);
 
+        // Limpar o formulario
         this.limparFormulario();
     }
 
