@@ -19,11 +19,10 @@ export class NegociacaoController {
         const negociacao = this.criaNegociacao();
         // Adicionar a negociacao na lista de negociacoes
         this.negociacoes.adiciona(negociacao);
-        // Atualizar a view com a lista de negociacoes atualizada
-        this.negociacoesView.update(this.negociacoes);
-        this.mensagemView.update("Negociação adicionada com sucesso!");
         // Limpar o formulario
         this.limparFormulario();
+        // Atualizar toda a view
+        this.atualizaView();
     }
     criaNegociacao() {
         // Tratar o campo "data": string -> date
@@ -43,5 +42,11 @@ export class NegociacaoController {
         this.inputValor.value = '';
         // Dar o foco para o campo "data"
         this.inputData.focus();
+    }
+    atualizaView() {
+        // Atualizar a view com a lista de negociacoes atualizada
+        this.negociacoesView.update(this.negociacoes);
+        // Notifica o usuário
+        this.mensagemView.update("Negociação adicionada com sucesso!");
     }
 }

@@ -5,13 +5,13 @@ export class Negociacoes {
     private negociacoes: Negociacao[] = [];
 
     // Adicionar uma nova negociacao na lista de negociacoes
-    adiciona(negociacao: Negociacao): void {
+    public adiciona(negociacao: Negociacao): void {
         this.negociacoes.push(negociacao);
     }
 
     // Imprimir a lista de negociacoes
     // "readonly" -> não permite a edição da lista
-    lista(): readonly Negociacao[] {
+    public lista(): readonly Negociacao[] {
         return this.negociacoes;
     }
 }
