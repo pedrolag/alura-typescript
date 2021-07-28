@@ -33,7 +33,16 @@ export class NegociacaoController {
         this.atualizaView();
     }
     importarDados() {
-        this.negociacoesService.obterNegociacoesDoDia()
+        this.negociacoesService
+            .obterNegociacoesDoDia()
+            .then(negociacoesDeHoje => {
+            return negociacoesDeHoje.filter(negociacaoDeHoje => {
+                return !this.negociacoes
+                    .lista()
+                    .some(negociacao => negociacao
+                    .ehIgual(negociacaoDeHoje));
+            });
+        })
             .then((negociacoes) => {
             negociacoes.forEach(negociacao => {
                 this.negociacoes.adiciona(negociacao);
