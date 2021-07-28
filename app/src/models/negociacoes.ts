@@ -1,10 +1,9 @@
 import { inspect } from "../decorators/inspect.js";
 import { logTempoExecucao } from "../decorators/log-tempo-execucao.js";
-import { Comparavel } from "../interfaces/comparavel.js";
-import { Imprimivel } from "../interfaces/imprimivel.js";
+import { Modelo } from "../interfaces/modelo.js";
 import { Negociacao } from "./negociacao.js";
 
-export class Negociacoes implements Imprimivel, Comparavel<Negociacoes> {
+export class Negociacoes implements Modelo<Negociacoes> {
     // Lista de negociacoes
     private negociacoes: Negociacao[] = [];
 
