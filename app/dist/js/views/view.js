@@ -21,10 +21,7 @@ export class View {
         }
     }
     update(model) {
-        let template = this.template(model);
-        if (this.escapar) {
-            template = template.replace(/<script>[\s\S]*?<\/script>/, '');
-        }
+        const template = this.template(model);
         this.elemento.innerHTML = template;
     }
 }

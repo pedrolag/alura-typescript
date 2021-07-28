@@ -33,10 +33,7 @@ export abstract class View<T> {
     @inspect()
     @logTempoExecucao()
     public update(model: T): void {
-        let template = this.template(model);
-        if (this.escapar) {
-            template = template.replace(/<script>[\s\S]*?<\/script>/, '');
-        }
+        const template = this.template(model);
         this.elemento.innerHTML = template;
     }
 }
