@@ -1,11 +1,11 @@
-export function logTempoExecucao() {
+export function inspect() {
     return function (target, propertyKey, descriptor) {
         const metodoOriginal = descriptor.value;
         descriptor.value = function (...args) {
-            const t1 = performance.now();
+            console.log(`---Método: ${propertyKey}`);
+            console.log(`------Parâmetros: ${JSON.stringify(args)}`);
             const retorno = metodoOriginal.apply(this, args);
-            const t2 = performance.now();
-            console.log(`Método "${propertyKey}": tempo de execução: ${(t2 - t1)}ms`);
+            console.log(`------Retorno: ${JSON.stringify(retorno)}`);
             return retorno;
         };
         return descriptor;
