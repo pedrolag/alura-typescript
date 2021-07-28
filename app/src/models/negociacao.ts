@@ -1,16 +1,11 @@
-import { Imprimivel } from "../utils/imprimivel.js";
+import { Imprimivel } from "../interfaces/imprimivel.js";
 
-
-export class Negociacao extends Imprimivel {
+export class Negociacao implements Imprimivel {
     constructor(
         private _data: Date,
         public readonly quantidade: number,
         public readonly valor: number
-    ) {
-        // É necessário chamar o construtor da classe pai
-        // quando se usa "extends"
-        super();
-    }
+    ) {}
 
     get data(): Date {
         // Desta forma não é possível alterar a propriedade data

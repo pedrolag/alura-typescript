@@ -6,10 +6,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { inspect } from "../decorators/inspect.js";
 import { logTempoExecucao } from "../decorators/log-tempo-execucao.js";
-import { Imprimivel } from "../utils/imprimivel.js";
-export class Negociacoes extends Imprimivel {
+export class Negociacoes {
     constructor() {
-        super(...arguments);
         this.negociacoes = [];
     }
     adiciona(negociacao) {
