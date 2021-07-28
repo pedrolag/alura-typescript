@@ -1,14 +1,19 @@
 import { inspect } from "../decorators/inspect.js";
 import { logTempoExecucao } from "../decorators/log-tempo-execucao.js";
+import { Imprimivel } from "../utils/imprimivel.js";
 import { Negociacao } from "./negociacao.js";
 
-export class Negociacoes {
+export class Negociacoes extends Imprimivel {
     // Lista de negociacoes
     private negociacoes: Negociacao[] = [];
 
     // Adicionar uma nova negociacao na lista de negociacoes
     public adiciona(negociacao: Negociacao): void {
         this.negociacoes.push(negociacao);
+    }
+
+    public paraTexto(): string {
+        return JSON.stringify(this.negociacoes);
     }
 
     // Imprimir a lista de negociacoes
