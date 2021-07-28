@@ -3,8 +3,12 @@ export function domInjector(seletor: string) {
         target: any,
         propertyKey: string
     ) {
+        let elemento: HTMLElement;
         const getter = function () {
-            const elemento = document.querySelector(seletor);
+            // Salva o elemento buscado no dom em uma especie de "cache"
+            if (!elemento) {
+                elemento = <HTMLElement>document.querySelector(seletor);
+            }
             return elemento;
         }
 
