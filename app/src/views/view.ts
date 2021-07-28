@@ -1,6 +1,3 @@
-import { inspect } from "../decorators/inspect.js";
-import { logTempoExecucao } from "../decorators/log-tempo-execucao.js";
-
 export abstract class View<T> {
     // elemento onde o HTML da view sera renderizado
     // "protected" -> Permite apenas a própria classe e suas filhas
@@ -30,8 +27,6 @@ export abstract class View<T> {
     protected abstract template(model: T): string;
 
     // Renderiza o HTML da view
-    @inspect()
-    @logTempoExecucao()
     public update(model: T): void {
         const template = this.template(model);
         this.elemento.innerHTML = template;

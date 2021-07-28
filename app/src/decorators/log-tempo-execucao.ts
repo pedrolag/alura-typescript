@@ -18,7 +18,7 @@ export function logTempoExecucao() {
             const t2 = performance.now();
 
             // Mostra a diferença do tempo
-            console.log(`Método "${propertyKey}": tempo de execução: ${(t2 - t1)}ms`);
+            // console.log(`Método "${propertyKey}": tempo de execução: ${(t2 - t1)}ms`);
 
             // Chama o retorno do método original
             return retorno;

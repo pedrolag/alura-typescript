@@ -1,3 +1,5 @@
+import { inspect } from "../decorators/inspect.js";
+import { logTempoExecucao } from "../decorators/log-tempo-execucao.js";
 import { Negociacao } from "./negociacao.js";
 
 export class Negociacoes {
@@ -11,6 +13,8 @@ export class Negociacoes {
 
     // Imprimir a lista de negociacoes
     // "readonly" -> não permite a edição da lista
+    @inspect()
+    @logTempoExecucao()
     public lista(): readonly Negociacao[] {
         return this.negociacoes;
     }
