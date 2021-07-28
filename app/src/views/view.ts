@@ -1,3 +1,5 @@
+import { logTempoExecucao } from "../decorators/log-tempo-execucao.js";
+
 export abstract class View<T> {
     // elemento onde o HTML da view sera renderizado
     // "protected" -> Permite apenas a própria classe e suas filhas
@@ -26,7 +28,8 @@ export abstract class View<T> {
     //               quando a classe for extendida.
     protected abstract template(model: T): string;
 
-    // Renderiza o HTML da view
+    // Renderiza o HTML da 
+    @logTempoExecucao()
     public update(model: T): void {
         let template = this.template(model);
         if (this.escapar) {
