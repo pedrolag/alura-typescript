@@ -55,7 +55,23 @@ export class NegociacaoController {
     }
 
     importarDados(): void {
-        console.log('oi');
+        fetch('http://localhost:8080/dados')
+            .then(res => res.json())
+            .then((dados: Array<any>) => {
+                return dados.map(dado => {
+                    return new Negociacao(
+                        new Date(),
+                        dado.vezes,
+                        dado.montante
+                    );
+                });
+            })
+            .then((negociacoes: Array<Negociacao>) => {
+                negociacoes.forEach(negociacao => {
+                    this.negociacoes.adiciona(negociacao);
+                });
+                this.negociacoesView.update(this.negociacoes);
+            });
     }
 
     private ehDiaUtil(data: Date): boolean {

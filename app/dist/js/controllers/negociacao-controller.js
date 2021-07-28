@@ -29,7 +29,19 @@ export class NegociacaoController {
         this.atualizaView();
     }
     importarDados() {
-        console.log('oi');
+        fetch('http://localhost:8080/dados')
+            .then(res => res.json())
+            .then((dados) => {
+            return dados.map(dado => {
+                return new Negociacao(new Date(), dado.vezes, dado.montante);
+            });
+        })
+            .then((negociacoes) => {
+            negociacoes.forEach(negociacao => {
+                this.negociacoes.adiciona(negociacao);
+            });
+            this.negociacoesView.update(this.negociacoes);
+        });
     }
     ehDiaUtil(data) {
         return data.getDay() > DiasDaSemana.DOMINGO
