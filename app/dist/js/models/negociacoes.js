@@ -27,3 +27,4 @@ __decorate([
     inspect(),
     logTempoExecucao()
 ], Negociacoes.prototype, "lista", null);
+//# sourceMappingURL=negociacoes.js.map
